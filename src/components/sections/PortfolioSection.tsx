@@ -1,0 +1,165 @@
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+
+interface Project {
+  id: number;
+  title: string;
+  category: string;
+  image: string;
+  description: string;
+}
+
+const PortfolioSection: React.FC = () => {
+  const projects: Project[] = [
+    {
+      id: 1,
+      title: 'E-commerce platforma',
+      category: 'web-shop',
+      image: '/project1.jpg',
+      description: 'Razvoj moderne e-commerce platforme sa integriranim sistemom plaćanja i upravljanjem zalihama.'
+    },
+    {
+      id: 2,
+      title: 'Korporativna web stranica',
+      category: 'web-dizajn',
+      image: '/project2.jpg',
+      description: 'Dizajn i razvoj responzivne korporativne web stranice sa naprednim funkcionalnostima.'
+    },
+    {
+      id: 3,
+      title: 'Aplikacija za upravljanje projektima',
+      category: 'softver',
+      image: '/project3.jpg',
+      description: 'Razvoj prilagođene aplikacije za upravljanje projektima i timovima.'
+    },
+    {
+      id: 4,
+      title: 'SEO optimizacija',
+      category: 'seo',
+      image: '/project4.jpg',
+      description: 'Implementacija SEO strategije koja je povećala organsku posjećenost za 150%.'
+    },
+    {
+      id: 5,
+      title: 'Mobilna aplikacija',
+      category: 'softver',
+      image: '/project5.jpg',
+      description: 'Razvoj mobilne aplikacije za iOS i Android platforme.'
+    },
+    {
+      id: 6,
+      title: 'Redizajn web stranice',
+      category: 'web-dizajn',
+      image: '/project6.jpg',
+      description: 'Kompletan redizajn postojeće web stranice sa fokusom na korisničko iskustvo.'
+    }
+  ];
+
+  const categories = ['sve', 'web-dizajn', 'web-shop', 'seo', 'softver'];
+  const [activeCategory, setActiveCategory] = useState('sve');
+
+  const filteredProjects = activeCategory === 'sve' 
+    ? projects 
+    : projects.filter(project => project.category === activeCategory);
+
+  return (
+    <section id="portfolio" className="section bg-white">
+      <div className="container">
+        <div className="text-center mb-16">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-3xl md:text-4xl font-bold mb-4"
+          >
+            Naši <span className="text-nextpixel-blue">radovi</span>
+          </motion.h2>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="w-20 h-1 bg-nextpixel-turquoise mx-auto mb-6"
+          ></motion.div>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-lg text-nextpixel-gray max-w-3xl mx-auto"
+          >
+            Pogledajte neke od naših najuspješnijih projekata i otkrijte šta možemo učiniti za vas.
+          </motion.p>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="flex flex-wrap justify-center mb-12"
+        >
+          {categories.map((category, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveCategory(category)}
+              className={`px-6 py-2 mx-2 mb-2 rounded-full transition-all ${
+                activeCategory === category
+                  ? 'bg-nextpixel-blue text-white'
+                  : 'bg-gray-100 text-nextpixel-gray hover:bg-gray-200'
+              }`}
+            >
+              {category.charAt(0).toUpperCase() + category.slice(1)}
+            </button>
+          ))}
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredProjects.map((project, index) => (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+              className="group relative overflow-hidden rounded-lg shadow-lg"
+            >
+              <img 
+                src={project.image} 
+                alt={project.title} 
+                className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.onerror = null;
+                  target.src = `https://placehold.co/600x400/0A2463/FFFFFF?text=${encodeURIComponent(project.title)}`;
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-nextpixel-dark to-transparent opacity-0 group-hover:opacity-90 transition-opacity duration-300 flex flex-col justify-end p-6">
+                <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
+                <p className="text-gray-300 text-sm">{project.description}</p>
+                <span className="inline-block mt-3 text-nextpixel-turquoise text-sm font-medium">
+                  {project.category.charAt(0).toUpperCase() + project.category.slice(1)}
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="text-center mt-12"
+        >
+          <a href="#contact" className="btn-primary inline-block">
+            Započnite projekat
+          </a>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+export default PortfolioSection;
