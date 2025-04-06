@@ -25,27 +25,39 @@ const ContactSection: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitError('');
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitSuccess(true);
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
+    try {
+      // Import dynamically to avoid issues with SSR
+      const { sendEmail } = await import('../../api/send-email');
       
-      // Reset success message after 5 seconds
-      setTimeout(() => {
-        setSubmitSuccess(false);
-      }, 5000);
-    }, 1500);
+      const result = await sendEmail(formData);
+      
+      if (result.success) {
+        setSubmitSuccess(true);
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+        
+        // Reset success message after 5 seconds
+        setTimeout(() => {
+          setSubmitSuccess(false);
+        }, 5000);
+      } else {
+        setSubmitError(result.error || t('contact.error'));
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      setSubmitError(t('contact.error'));
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
