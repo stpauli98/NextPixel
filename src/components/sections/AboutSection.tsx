@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FaLaptopCode, FaUsers, FaRocket, FaAward } from 'react-icons/fa';
 import { Icon } from '../../utils/icons';
 
+
 const AboutSection: React.FC = () => {
   const features = [
     {
