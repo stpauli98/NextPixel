@@ -21,7 +21,7 @@ const srTranslations = {
   'nav.contactUs': 'Kontaktirajte nas',
   
   // O nama sekcija
-  'about.title': 'Ko smo',
+  'about.title': 'Ko smo mi',
   'about.subtitle': 'Digitalna agencija sa strašću za inovacije',
   'about.description': 'NextPixel je digitalna agencija koja se bavi izradom web stranica, web shopova, SEO optimizacijom, održavanjem web sajtova, kao i razvojem softverskih rješenja po zahtjevu klijenata.',
   'about.history': 'Od 2015. godine posvećeni smo stvaranju digitalnih rješenja koja pomažu našim klijentima da ostvare svoje poslovne ciljeve. Naš pristup kombinuje tehničku stručnost, kreativnost i duboko razumijevanje poslovnih potreba naših klijenata.',

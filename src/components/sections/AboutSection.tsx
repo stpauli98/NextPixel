@@ -41,7 +41,13 @@ const AboutSection: React.FC = () => {
             transition={{ duration: 0.6 }}
             className="text-3xl md:text-4xl font-bold mb-4"
           >
-            {t('about.title')} <span className="text-nextpixel-blue">mi</span>
+            {t('about.title').includes('O nama') ? (
+              <>
+                O na<span className="text-nextpixel-blue">ma</span>
+              </>
+            ) : (
+              t('about.title')
+            )}
           </motion.h2>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
