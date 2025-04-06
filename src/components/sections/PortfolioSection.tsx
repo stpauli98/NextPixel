@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useTranslate } from '../../context/LanguageContext';
 
 interface Project {
   id: number;
@@ -10,52 +11,59 @@ interface Project {
 }
 
 const PortfolioSection: React.FC = () => {
+  const { t } = useTranslate();
   const projects: Project[] = [
     {
       id: 1,
-      title: 'E-commerce platforma',
+      title: t('portfolio.project1.title'),
       category: 'web-shop',
       image: '/project1.jpg',
-      description: 'Razvoj moderne e-commerce platforme sa integriranim sistemom plaćanja i upravljanjem zalihama.'
+      description: t('portfolio.project1.description')
     },
     {
       id: 2,
-      title: 'Korporativna web stranica',
-      category: 'web-dizajn',
+      title: t('portfolio.project2.title'),
+      category: t('portfolio.category.webDesign'),
       image: '/project2.jpg',
-      description: 'Dizajn i razvoj responzivne korporativne web stranice sa naprednim funkcionalnostima.'
+      description: t('portfolio.project2.description')
     },
     {
       id: 3,
-      title: 'Aplikacija za upravljanje projektima',
-      category: 'softver',
+      title: t('portfolio.project3.title'),
+      category: t('portfolio.category.software'),
       image: '/project3.jpg',
-      description: 'Razvoj prilagođene aplikacije za upravljanje projektima i timovima.'
+      description: t('portfolio.project3.description')
     },
     {
       id: 4,
-      title: 'SEO optimizacija',
+      title: t('portfolio.project4.title'),
       category: 'seo',
       image: '/project4.jpg',
-      description: 'Implementacija SEO strategije koja je povećala organsku posjećenost za 150%.'
+      description: t('portfolio.project4.description')
     },
     {
       id: 5,
-      title: 'Mobilna aplikacija',
-      category: 'softver',
+      title: t('portfolio.project5.title'),
+      category: t('portfolio.category.software'),
       image: '/project5.jpg',
-      description: 'Razvoj mobilne aplikacije za iOS i Android platforme.'
+      description: t('portfolio.project5.description')
     },
     {
       id: 6,
-      title: 'Redizajn web stranice',
-      category: 'web-dizajn',
+      title: t('portfolio.project6.title'),
+      category: t('portfolio.category.webDesign'),
       image: '/project6.jpg',
-      description: 'Kompletan redizajn postojeće web stranice sa fokusom na korisničko iskustvo.'
+      description: t('portfolio.project6.description')
     }
   ];
 
-  const categories = ['sve', 'web-dizajn', 'web-shop', 'seo', 'softver'];
+  const categories = [
+    t('portfolio.category.all'), 
+    t('portfolio.category.webDesign'), 
+    t('portfolio.category.webShop'), 
+    'seo', 
+    t('portfolio.category.software')
+  ];
   const [activeCategory, setActiveCategory] = useState('sve');
 
   const filteredProjects = activeCategory === 'sve' 
@@ -73,7 +81,17 @@ const PortfolioSection: React.FC = () => {
             transition={{ duration: 0.6 }}
             className="text-3xl md:text-4xl font-bold mb-4"
           >
-            Naši <span className="text-nextpixel-blue">radovi</span>
+            {t('portfolio.title').includes('radovi') ? (
+              <>
+                {t('portfolio.title').split('radovi')[0]}
+                <span className="text-nextpixel-blue">radovi</span>
+                {t('portfolio.title').split('radovi')[1]}
+              </>
+            ) : (
+              <>
+                {t('portfolio.title').split(' ')[0]} <span className="text-nextpixel-blue">{t('portfolio.title').split(' ').slice(1).join(' ')}</span>
+              </>
+            )}
           </motion.h2>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -89,7 +107,7 @@ const PortfolioSection: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-lg text-nextpixel-gray max-w-3xl mx-auto"
           >
-            Pogledajte neke od naših najuspješnijih projekata i otkrijte šta možemo učiniti za vas.
+            {t('portfolio.subtitle')}
           </motion.p>
         </div>
 
@@ -154,7 +172,7 @@ const PortfolioSection: React.FC = () => {
           className="text-center mt-12"
         >
           <a href="#contact" className="btn-primary inline-block">
-            Započnite projekat
+            {t('portfolio.startProject')}
           </a>
         </motion.div>
       </div>

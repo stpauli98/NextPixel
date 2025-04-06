@@ -2,8 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaDesktop, FaShoppingCart, FaSearch, FaServer, FaCode, FaMobileAlt } from 'react-icons/fa';
 import { Icon } from '../../utils/icons';
+import { useTranslate } from '../../context/LanguageContext';
 
 const ServicesSection: React.FC = () => {
+  const { t } = useTranslate();
   type IconType = typeof FaDesktop;
 
 interface Service {
@@ -15,33 +17,33 @@ interface Service {
 const services: Service[] = [
     {
       icon: FaDesktop,
-      title: 'Web dizajn',
-      description: 'Kreiramo vizuelno atraktivne i funkcionalne web stranice koje ostavljaju snažan utisak na posjetioce.'
+      title: t('services.webDesign.title'),
+      description: t('services.webDesign.description')
     },
     {
       icon: FaShoppingCart,
-      title: 'E-commerce rješenja',
-      description: 'Razvijamo online prodavnice koje povećavaju prodaju i pružaju izvrsno korisničko iskustvo.'
+      title: t('services.ecommerce.title'),
+      description: t('services.ecommerce.description')
     },
     {
       icon: FaSearch,
-      title: 'SEO optimizacija',
-      description: 'Optimizujemo vaš sajt za pretraživače kako biste bili vidljivi potencijalnim klijentima.'
+      title: t('services.seo.title'),
+      description: t('services.seo.description')
     },
     {
       icon: FaServer,
-      title: 'Održavanje web stranica',
-      description: 'Brinemo o vašoj web stranici, osiguravajući da je uvijek sigurna, ažurna i funkcionalna.'
+      title: t('services.maintenance.title'),
+      description: t('services.maintenance.description')
     },
     {
       icon: FaCode,
-      title: 'Razvoj softvera',
-      description: 'Razvijamo prilagođena softverska rješenja koja automatizuju procese i povećavaju efikasnost.'
+      title: t('services.development.title'),
+      description: t('services.development.description')
     },
     {
       icon: FaMobileAlt,
-      title: 'Responzivni dizajn',
-      description: 'Osiguravamo da vaša web stranica izgleda i funkcioniše savršeno na svim uređajima.'
+      title: t('services.responsive.title'),
+      description: t('services.responsive.description')
     }
   ];
 
@@ -56,7 +58,17 @@ const services: Service[] = [
             transition={{ duration: 0.6 }}
             className="text-3xl md:text-4xl font-bold mb-4"
           >
-            Naše <span className="text-nextpixel-blue">usluge</span>
+            {t('services.title').includes('usluge') ? (
+              <>
+                {t('services.title').split('usluge')[0]}
+                <span className="text-nextpixel-blue">usluge</span>
+                {t('services.title').split('usluge')[1]}
+              </>
+            ) : (
+              <>
+                {t('services.title').split(' ')[0]} <span className="text-nextpixel-blue">{t('services.title').split(' ').slice(1).join(' ')}</span>
+              </>
+            )}
           </motion.h2>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -72,7 +84,7 @@ const services: Service[] = [
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-lg text-nextpixel-gray max-w-3xl mx-auto"
           >
-            Pružamo širok spektar digitalnih usluga kako bismo pomogli vašem biznisu da raste i napreduje u digitalnom svijetu.
+            {t('services.subtitle')}
           </motion.p>
         </div>
 
@@ -103,7 +115,7 @@ const services: Service[] = [
           className="text-center mt-12"
         >
           <a href="#contact" className="btn-primary inline-block">
-            Zatražite ponudu
+            {t('services.requestQuote')}
           </a>
         </motion.div>
       </div>

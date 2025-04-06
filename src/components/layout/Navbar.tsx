@@ -3,12 +3,14 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import { Icon } from '../../utils/icons';
 import { motion } from 'framer-motion';
 import LanguageSelector from '../LanguageSelector';
+import { useTranslate } from '../../context/LanguageContext';
 
 
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { t } = useTranslate();
 
 
   useEffect(() => {
@@ -25,11 +27,11 @@ const Navbar: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Početna', href: '#home' },
-    { name: 'O nama', href: '#about' },
-    { name: 'Usluge', href: '#services' },
-    { name: 'Portfolio', href: '#portfolio' },
-    { name: 'Kontakt', href: '#contact' },
+    { name: t('nav.home'), href: '#home' },
+    { name: t('nav.about'), href: '#about' },
+    { name: t('nav.services'), href: '#services' },
+    { name: t('nav.portfolio'), href: '#portfolio' },
+    { name: t('nav.contact'), href: '#contact' },
   ];
 
   return (
@@ -53,7 +55,7 @@ const Navbar: React.FC = () => {
             </a>
           ))}
           <a href="#contact" className="btn-primary">
-            Kontaktirajte nas
+            {t('nav.contactUs')}
           </a>
           <LanguageSelector />
         </div>
@@ -91,7 +93,7 @@ const Navbar: React.FC = () => {
               className="btn-primary text-center"
               onClick={() => setIsOpen(false)}
             >
-              Kontaktirajte nas
+              {t('nav.contactUs')}
             </a>
             <div className="py-2">
               <LanguageSelector />

@@ -2,29 +2,31 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaLaptopCode, FaUsers, FaRocket, FaAward } from 'react-icons/fa';
 import { Icon } from '../../utils/icons';
+import { useTranslate } from '../../context/LanguageContext';
 
 
 const AboutSection: React.FC = () => {
+  const { t } = useTranslate();
   const features = [
     {
       icon: FaLaptopCode,
-      title: 'Stručni tim',
-      description: 'Naš tim stručnjaka ima višegodišnje iskustvo u razvoju web i softverskih rješenja.'
+      title: t('features.expertise.title'),
+      description: t('features.expertise.description')
     },
     {
       icon: FaUsers,
-      title: 'Korisnički fokus',
-      description: 'Svaki projekat prilagođavamo specifičnim potrebama klijenata i njihovih korisnika.'
+      title: t('features.userFocus.title'),
+      description: t('features.userFocus.description')
     },
     {
       icon: FaRocket,
-      title: 'Brza isporuka',
-      description: 'Poštujemo rokove i osiguravamo brzu implementaciju projekata bez kompromisa u kvaliteti.'
+      title: t('features.fastDelivery.title'),
+      description: t('features.fastDelivery.description')
     },
     {
       icon: FaAward,
-      title: 'Kvalitet',
-      description: 'Koristimo najnovije tehnologije i najbolje prakse za razvoj visokokvalitetnih rješenja.'
+      title: t('features.quality.title'),
+      description: t('features.quality.description')
     }
   ];
 
@@ -39,7 +41,7 @@ const AboutSection: React.FC = () => {
             transition={{ duration: 0.6 }}
             className="text-3xl md:text-4xl font-bold mb-4"
           >
-            Ko smo <span className="text-nextpixel-blue">mi</span>
+            {t('about.title')} <span className="text-nextpixel-blue">mi</span>
           </motion.h2>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -55,8 +57,7 @@ const AboutSection: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-lg text-nextpixel-gray max-w-3xl mx-auto"
           >
-            NextPixel je digitalna agencija koja se bavi izradom web stranica, web shopova, 
-            SEO optimizacijom, održavanjem web sajtova, kao i razvojem softverskih rješenja po zahtjevu klijenata.
+            {t('about.description')}
           </motion.p>
         </div>
 
@@ -89,14 +90,12 @@ const AboutSection: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h3 className="text-2xl font-bold mb-6">Digitalna agencija sa strašću za inovacije</h3>
+            <h3 className="text-2xl font-bold mb-6">{t('about.subtitle')}</h3>
             <p className="text-nextpixel-gray mb-6">
-              Od 2015. godine posvećeni smo stvaranju digitalnih rješenja koja pomažu našim klijentima da ostvare svoje poslovne ciljeve. 
-              Naš pristup kombinuje tehničku stručnost, kreativnost i duboko razumijevanje poslovnih potreba naših klijenata.
+              {t('about.history')}
             </p>
             <p className="text-nextpixel-gray mb-8">
-              Vjerujemo da uspješna digitalna rješenja moraju biti ne samo tehnički izvrsna, već i prilagođena korisnicima, 
-              estetski privlačna i optimizovana za postizanje poslovnih rezultata.
+              {t('about.philosophy')}
             </p>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">

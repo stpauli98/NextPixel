@@ -1,7 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslate } from '../../context/LanguageContext';
 
 const HeroSection: React.FC = () => {
+  const { t } = useTranslate();
   return (
     <section id="home" className="relative min-h-screen flex items-center bg-gradient-to-br from-nextpixel-dark to-nextpixel-blue overflow-hidden">
       {/* Background Elements */}
@@ -18,18 +20,25 @@ const HeroSection: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-              Digitalna rješenja za <span className="text-nextpixel-turquoise">moderno</span> poslovanje
+              {t('hero.title').split('moderno').length > 1 ? (
+                <>
+                  {t('hero.title').split('moderno')[0]}
+                  <span className="text-nextpixel-turquoise">moderno</span>
+                  {t('hero.title').split('moderno')[1]}
+                </>
+              ) : (
+                t('hero.title')
+              )}
             </h1>
             <p className="text-lg text-gray-300 mb-8">
-              Kreiramo web stranice i softverska rješenja koja pokreću vaš biznis. 
-              Naš tim stručnjaka posvećen je stvaranju inovativnih digitalnih rješenja koja donose rezultate.
+              {t('hero.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
               <a href="#services" className="btn-primary text-center">
-                Naše usluge
+                {t('hero.services')}
               </a>
               <a href="#contact" className="btn-secondary text-center">
-                Kontaktirajte nas
+                {t('hero.contact')}
               </a>
             </div>
           </motion.div>
@@ -71,7 +80,7 @@ const HeroSection: React.FC = () => {
           }}
           className="text-white flex flex-col items-center"
         >
-          <span className="mb-2">Saznajte više</span>
+          <span className="mb-2">{t('hero.learnMore')}</span>
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             className="h-6 w-6" 

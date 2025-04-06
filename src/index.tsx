@@ -3,17 +3,20 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { LanguageProvider } from './context/LanguageContext';
 
-// i18n removed - using simpler language switching approach
+// Korištenje vlastitog sustava za prijevode umjesto i18n
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <Suspense fallback="Loading...">
-      <App />
-    </Suspense>
+    <LanguageProvider>
+      <Suspense fallback="Loading...">
+        <App />
+      </Suspense>
+    </LanguageProvider>
   </React.StrictMode>
 );
 

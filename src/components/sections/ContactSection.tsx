@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
 import { Icon } from '../../utils/icons';
+import { useTranslate } from '../../context/LanguageContext';
 
 const ContactSection: React.FC = () => {
+  const { t } = useTranslate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -49,20 +51,20 @@ const ContactSection: React.FC = () => {
   const contactInfo = [
     {
       icon: FaEnvelope,
-      title: 'Email',
+      title: t('contact.info.email'),
       info: 'info@nextpixel.com',
       link: 'mailto:info@nextpixel.com'
     },
     {
       icon: FaPhone,
-      title: 'Telefon',
+      title: t('contact.info.phone'),
       info: '+387 33 123 456',
       link: 'tel:+38733123456'
     },
     {
       icon: FaMapMarkerAlt,
-      title: 'Adresa',
-      info: 'Adresa 123, 71000 Sarajevo, BiH',
+      title: t('contact.info.address'),
+      info: t('contact.info.addressDetails'),
       link: 'https://maps.google.com/?q=Sarajevo'
     }
   ];
@@ -78,7 +80,17 @@ const ContactSection: React.FC = () => {
             transition={{ duration: 0.6 }}
             className="text-3xl md:text-4xl font-bold mb-4"
           >
-            Kontaktirajte <span className="text-nextpixel-blue">nas</span>
+            {t('contact.title').includes('nas') ? (
+              <>
+                {t('contact.title').split('nas')[0]}
+                <span className="text-nextpixel-blue">nas</span>
+                {t('contact.title').split('nas')[1]}
+              </>
+            ) : (
+              <>
+                {t('contact.title').split(' ').slice(0, -1).join(' ')} <span className="text-nextpixel-blue">{t('contact.title').split(' ').slice(-1)}</span>
+              </>
+            )}
           </motion.h2>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -94,7 +106,7 @@ const ContactSection: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-lg text-nextpixel-gray max-w-3xl mx-auto"
           >
-            Imate pitanje ili želite započeti projekat? Javite nam se i odgovorićemo vam u najkraćem mogućem roku.
+            {t('contact.subtitle')}
           </motion.p>
         </div>
 
@@ -107,11 +119,11 @@ const ContactSection: React.FC = () => {
             className="lg:col-span-2"
           >
             <div className="bg-white rounded-lg shadow-lg p-8">
-              <h3 className="text-2xl font-bold mb-6">Pošaljite nam poruku</h3>
+              <h3 className="text-2xl font-bold mb-6">{t('contact.sendMessage')}</h3>
               
               {submitSuccess && (
                 <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
-                  Hvala na poruci! Kontaktiraćemo vas uskoro.
+                  {t('contact.success')}
                 </div>
               )}
               
@@ -124,7 +136,7 @@ const ContactSection: React.FC = () => {
               <form onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                   <div>
-                    <label htmlFor="name" className="block text-nextpixel-gray mb-2">Ime i prezime *</label>
+                    <label htmlFor="name" className="block text-nextpixel-gray mb-2">{t('contact.name')} *</label>
                     <input
                       type="text"
                       id="name"
@@ -136,7 +148,7 @@ const ContactSection: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-nextpixel-gray mb-2">Email adresa *</label>
+                    <label htmlFor="email" className="block text-nextpixel-gray mb-2">{t('contact.email')} *</label>
                     <input
                       type="email"
                       id="email"
@@ -150,7 +162,7 @@ const ContactSection: React.FC = () => {
                 </div>
                 
                 <div className="mb-6">
-                  <label htmlFor="subject" className="block text-nextpixel-gray mb-2">Predmet *</label>
+                  <label htmlFor="subject" className="block text-nextpixel-gray mb-2">{t('contact.subject')} *</label>
                   <input
                     type="text"
                     id="subject"
@@ -163,7 +175,7 @@ const ContactSection: React.FC = () => {
                 </div>
                 
                 <div className="mb-6">
-                  <label htmlFor="message" className="block text-nextpixel-gray mb-2">Poruka *</label>
+                  <label htmlFor="message" className="block text-nextpixel-gray mb-2">{t('contact.message')} *</label>
                   <textarea
                     id="message"
                     name="message"
@@ -180,7 +192,7 @@ const ContactSection: React.FC = () => {
                   disabled={isSubmitting}
                   className={`btn-primary w-full md:w-auto ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
                 >
-                  {isSubmitting ? 'Slanje...' : 'Pošalji poruku'}
+                  {isSubmitting ? t('contact.sending') : t('contact.send')}
                 </button>
               </form>
             </div>
@@ -193,7 +205,7 @@ const ContactSection: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <div className="bg-white rounded-lg shadow-lg p-8 h-full">
-              <h3 className="text-2xl font-bold mb-6">Kontakt informacije</h3>
+              <h3 className="text-2xl font-bold mb-6">{t('contact.info.title')}</h3>
               
               <div className="space-y-6">
                 {contactInfo.map((item, index) => (
@@ -222,13 +234,13 @@ const ContactSection: React.FC = () => {
               </div>
               
               <div className="mt-8">
-                <h4 className="font-bold mb-4">Radno vrijeme</h4>
-                <p className="text-nextpixel-gray mb-2">Ponedjeljak - Petak: 9:00 - 17:00</p>
-                <p className="text-nextpixel-gray">Subota - Nedjelja: Zatvoreno</p>
+                <h4 className="font-bold mb-4">{t('contact.workingHours.title')}</h4>
+                <p className="text-nextpixel-gray mb-2">{t('contact.workingHours.weekdays')}</p>
+                <p className="text-nextpixel-gray">{t('contact.workingHours.weekend')}</p>
               </div>
               
               <div className="mt-8">
-                <h4 className="font-bold mb-4">Pratite nas</h4>
+                <h4 className="font-bold mb-4">{t('contact.followUs')}</h4>
                 <div className="flex space-x-4">
                   <a href="https://facebook.com" className="text-nextpixel-gray hover:text-nextpixel-blue transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">

@@ -2,8 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaCheckCircle, FaLightbulb, FaClock, FaChartLine, FaRocket, FaUsers, FaHeadset } from 'react-icons/fa';
 import { Icon } from '../../utils/icons';
+import { useTranslate } from '../../context/LanguageContext';
 
 const WhyChooseUsSection: React.FC = () => {
+  const { t } = useTranslate();
   type IconType = typeof FaLightbulb;
 
 interface Reason {
@@ -15,38 +17,38 @@ interface Reason {
 const reasons: Reason[] = [
     {
       icon: FaLightbulb,
-      title: 'Kreativnost',
-      description: 'Donosimo svježe i inovativne ideje koje će vašu web stranicu učiniti jedinstvenom.'
+      title: t('whyChooseUs.creativity.title'),
+      description: t('whyChooseUs.creativity.description')
     },
     {
       icon: FaRocket,
-      title: 'Brza isporuka',
-      description: 'Poštujemo rokove i osiguravamo brzu isporuku projekata bez kompromisa u kvaliteti.'
+      title: t('whyChooseUs.fastDelivery.title'),
+      description: t('whyChooseUs.fastDelivery.description')
     },
     {
       icon: FaUsers,
-      title: 'Stručni tim',
-      description: 'Naš tim čine stručnjaci sa dugogodišnjim iskustvom u digitalnoj industriji.'
+      title: t('whyChooseUs.expertTeam.title'),
+      description: t('whyChooseUs.expertTeam.description')
     },
     {
       icon: FaHeadset,
-      title: 'Podrška 24/7',
-      description: 'Uvijek smo dostupni za sva vaša pitanja i pružamo kontinuiranu podršku.'
+      title: t('whyChooseUs.support.title'),
+      description: t('whyChooseUs.support.description')
     },
     {
       icon: FaClock,
-      title: 'Poštovanje rokova',
-      description: 'Posvećeni smo isporuci projekata na vrijeme i u skladu sa dogovorenim budžetom.'
+      title: t('whyChooseUs.deadlines.title'),
+      description: t('whyChooseUs.deadlines.description')
     },
     {
       icon: FaCheckCircle,
-      title: 'Kvalitet i pouzdanost',
-      description: 'Naša rješenja su testirana i optimizovana za najbolje performanse i korisničko iskustvo.'
+      title: t('whyChooseUs.quality.title'),
+      description: t('whyChooseUs.quality.description')
     },
     {
       icon: FaChartLine,
-      title: 'Fokus na rezultate',
-      description: 'Razvijamo rješenja koja donose mjerljive poslovne rezultate i povrat investicije.'
+      title: t('whyChooseUs.results.title'),
+      description: t('whyChooseUs.results.description')
     }
   ];
 
@@ -61,7 +63,17 @@ const reasons: Reason[] = [
             transition={{ duration: 0.6 }}
             className="text-3xl md:text-4xl font-bold mb-4"
           >
-            Zašto odabrati <span className="text-nextpixel-turquoise">nas</span>
+            {t('whyChooseUs.title').includes('nas') ? (
+              <>
+                {t('whyChooseUs.title').split('nas')[0]}
+                <span className="text-nextpixel-turquoise">nas</span>
+                {t('whyChooseUs.title').split('nas')[1]}
+              </>
+            ) : (
+              <>
+                {t('whyChooseUs.title').split(' ').slice(0, -1).join(' ')} <span className="text-nextpixel-turquoise">{t('whyChooseUs.title').split(' ').slice(-1)}</span>
+              </>
+            )}
           </motion.h2>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -77,7 +89,7 @@ const reasons: Reason[] = [
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-lg text-gray-300 max-w-3xl mx-auto"
           >
-            Naša misija je pomoći vašem biznisu da raste kroz digitalne inovacije. Evo zašto klijenti biraju NextPixel.
+            {t('whyChooseUs.subtitle')}
           </motion.p>
         </div>
 
@@ -108,7 +120,7 @@ const reasons: Reason[] = [
           className="text-center mt-12"
         >
           <a href="#contact" className="btn-secondary inline-block">
-            Razgovarajmo o vašem projektu
+            {t('whyChooseUs.talkAboutProject')}
           </a>
         </motion.div>
       </div>
