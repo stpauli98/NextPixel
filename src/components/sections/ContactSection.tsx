@@ -33,7 +33,7 @@ const ContactSection: React.FC = () => {
     setSubmitSuccess(false);
     
     try {
-      const response = await fetch('/api/send', {
+      const response = await fetch('http://localhost:5002/api/send', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
