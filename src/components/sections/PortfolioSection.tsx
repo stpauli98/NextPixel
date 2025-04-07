@@ -15,44 +15,44 @@ const PortfolioSection: React.FC = () => {
   const projects: Project[] = [
     {
       id: 1,
-      title: t('portfolio.project1.title'),
-      category: 'web-shop',
-      image: '/project1.jpg',
+      title: 'E-commerce Platform',
+      category: t('portfolio.category.webShop'),
+      image: '/images/e-commerc.png',
       description: t('portfolio.project1.description')
     },
     {
       id: 2,
       title: t('portfolio.project2.title'),
       category: t('portfolio.category.webDesign'),
-      image: '/project2.jpg',
+      image: '/images/corporate-website.png',
       description: t('portfolio.project2.description')
     },
     {
       id: 3,
       title: t('portfolio.project3.title'),
       category: t('portfolio.category.software'),
-      image: '/project3.jpg',
+      image: '/images/pm-app.png',
       description: t('portfolio.project3.description')
     },
     {
       id: 4,
       title: t('portfolio.project4.title'),
       category: 'seo',
-      image: '/project4.jpg',
+      image: '/images/seo-optim.png',
       description: t('portfolio.project4.description')
     },
     {
       id: 5,
       title: t('portfolio.project5.title'),
       category: t('portfolio.category.software'),
-      image: '/project5.jpg',
+      image: '/images/mobile-app.png',
       description: t('portfolio.project5.description')
     },
     {
       id: 6,
       title: t('portfolio.project6.title'),
       category: t('portfolio.category.webDesign'),
-      image: '/project6.jpg',
+      image: '/images/redesign.png',
       description: t('portfolio.project6.description')
     }
   ];
@@ -64,9 +64,9 @@ const PortfolioSection: React.FC = () => {
     'seo', 
     t('portfolio.category.software')
   ];
-  const [activeCategory, setActiveCategory] = useState('sve');
+  const [activeCategory, setActiveCategory] = useState(t('portfolio.category.all'));
 
-  const filteredProjects = activeCategory === 'sve' 
+  const filteredProjects = activeCategory === t('portfolio.category.all') 
     ? projects 
     : projects.filter(project => project.category === activeCategory);
 
@@ -141,19 +141,22 @@ const PortfolioSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-              className="group relative overflow-hidden rounded-lg shadow-lg"
+              className="group relative overflow-hidden rounded-lg shadow-lg h-full flex flex-col"
             >
-              <img 
-                src={project.image} 
-                alt={project.title} 
-                className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.onerror = null;
-                  target.src = `https://placehold.co/600x400/0A2463/FFFFFF?text=${encodeURIComponent(project.title)}`;
-                }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-nextpixel-dark to-transparent opacity-0 group-hover:opacity-90 transition-opacity duration-300 flex flex-col justify-end p-6">
+              <div className="w-full h-64 overflow-hidden bg-white flex items-center justify-center p-0">
+                <img 
+                  src={project.image} 
+                  alt={project.title} 
+                  className={`${project.title === 'E-commerce Platform' ? 'h-64 w-auto object-contain' : 'w-full h-full object-cover'} transition-transform duration-500 group-hover:scale-110`}
+                  style={project.title === 'E-commerce Platform' ? { objectPosition: 'center' } : {}}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.onerror = null;
+                    target.src = `https://placehold.co/600x400/0A2463/FFFFFF?text=${encodeURIComponent(project.title)}`;
+                  }}
+                />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-nextpixel-dark to-transparent opacity-0 group-hover:opacity-90 transition-opacity duration-300 flex flex-col justify-end p-6 z-10">
                 <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
                 <p className="text-gray-300 text-sm">{project.description}</p>
                 <span className="inline-block mt-3 text-nextpixel-turquoise text-sm font-medium">

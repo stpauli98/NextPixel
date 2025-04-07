@@ -49,18 +49,38 @@ const HeroSection: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="hidden lg:block"
           >
-            <div className="relative">
-              <div className="absolute inset-0 bg-nextpixel-turquoise rounded-lg opacity-20 blur-xl transform -rotate-6"></div>
-              <img 
-                src="/hero-image.svg" 
-                alt="Digital Solutions" 
-                className="relative z-10 w-full h-auto"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.onerror = null;
-                  target.src = "https://placehold.co/600x400/0A2463/FFFFFF?text=NextPixel";
-                }}
-              />
+            <div className="relative overflow-hidden rounded-xl">
+              {/* Pozadinski efekt */}
+              <div className="absolute inset-0 bg-nextpixel-turquoise rounded-xl opacity-20 blur-xl transform -rotate-6"></div>
+              
+              {/* Kontejner za sliku s gradijentnim rubovima koji se stapaju s pozadinom sekcije */}
+              <div className="relative z-10 w-full h-full rounded-lg overflow-hidden">
+                {/* Gradijentne maske za postepeni prijelaz u pozadinu sekcije */}
+                <div className="absolute inset-0 bg-gradient-to-t from-nextpixel-dark via-transparent to-transparent opacity-30 z-20"></div>
+                <div className="absolute inset-0 bg-gradient-to-l from-nextpixel-dark via-transparent to-transparent opacity-30 z-20"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-nextpixel-dark via-transparent to-transparent opacity-30 z-20"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-nextpixel-dark via-transparent to-transparent opacity-30 z-20"></div>
+                
+                {/* Dodatni gradijent za kuteve koji se stapa s pozadinom */}
+                <div className="absolute inset-0 rounded-lg z-20" 
+                     style={{
+                       background: 'radial-gradient(circle at center, transparent 50%, rgba(10, 36, 99, 0.8) 100%)',
+                       opacity: 0.6
+                     }}>
+                </div>
+                
+                {/* Sama slika */}
+                <img 
+                  src="/images/NextPixelV2.png" 
+                  alt="Digital Solutions" 
+                  className="w-full h-auto"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.onerror = null;
+                    target.src = "https://placehold.co/600x400/0A2463/FFFFFF?text=NextPixel";
+                  }}
+                />
+              </div>
             </div>
           </motion.div>
         </div>
