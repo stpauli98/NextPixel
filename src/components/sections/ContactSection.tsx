@@ -14,7 +14,6 @@ const ContactSection: React.FC = () => {
   });
   
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -30,54 +29,27 @@ const ContactSection: React.FC = () => {
     setIsSubmitting(true);
     setSubmitError('');
     
-    try {
-      // Import dynamically to avoid issues with SSR
-      const { sendEmail } = await import('../../api/send-email');
-      
-      const result = await sendEmail(formData);
-      
-      if (result.success) {
-        setSubmitSuccess(true);
-        setFormData({
-          name: '',
-          email: '',
-          subject: '',
-          message: ''
-        });
-        
-        // Reset success message after 5 seconds
-        setTimeout(() => {
-          setSubmitSuccess(false);
-        }, 5000);
-      } else {
-        setSubmitError(result.error || t('contact.error'));
-      }
-    } catch (error) {
-      console.error('Error sending email:', error);
-      setSubmitError(t('contact.error'));
-    } finally {
-      setIsSubmitting(false);
-    }
+    
   };
 
   const contactInfo = [
     {
       icon: FaEnvelope,
       title: t('contact.info.email'),
-      info: 'info@nextpixel.com',
-      link: 'mailto:info@nextpixel.com'
+      info: 'pixelnext9@gmail.com',
+      link: 'mailto:pixelnext9@gmail.com'
     },
     {
       icon: FaPhone,
       title: t('contact.info.phone'),
-      info: '+387 33 123 456',
-      link: 'tel:+38733123456'
+      info: '+387 66 603 900',
+      link: 'tel:+38766603900'
     },
     {
       icon: FaMapMarkerAlt,
       title: t('contact.info.address'),
       info: t('contact.info.addressDetails'),
-      link: 'https://maps.google.com/?q=Sarajevo'
+      link: 'https://maps.google.com/?q=Gradiska'
     }
   ];
 
@@ -133,11 +105,6 @@ const ContactSection: React.FC = () => {
             <div className="bg-white rounded-lg shadow-lg p-8">
               <h3 className="text-2xl font-bold mb-6">{t('contact.sendMessage')}</h3>
               
-              {submitSuccess && (
-                <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
-                  {t('contact.success')}
-                </div>
-              )}
               
               {submitError && (
                 <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
