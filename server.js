@@ -8,7 +8,12 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 // Inicijalizacija Resend s API ključem
-const resend = new Resend(process.env.REACT_APP_RESEND_API_KEY || 're_DC8YXV5C_DbG8KqJvKkNq3yjhUsr9pxSf');
+// Koristimo hardkodirani API ključ ako nije dostupan u env varijablama
+// NAPOMENA: U produkciji, uvijek koristite env varijable za API ključeve
+const resendApiKey = process.env.RESEND_API_KEY || 're_DC8YXV5C_DbG8KqJvKkNq3yjhUsr9pxSf';
+const resend = new Resend(resendApiKey);
+
+console.log('Application initialized successfully');
 
 // Middleware
 app.use(cors());
@@ -50,7 +55,7 @@ app.post('/api/send-email', async (req, res) => {
     // Slanje emaila koristeći Resend
     const { data, error } = await resend.emails.send({
       from: 'NextPixel <onboarding@resend.dev>',
-      to: ['info@nextpixel.com'],
+      to: ['dzonifu@gmail.com'],
       subject: `New Contact Form Submission: ${subject}`,
       html: htmlContent,
     });
@@ -69,7 +74,7 @@ app.post('/api/send-email', async (req, res) => {
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
-app.get('/*', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
