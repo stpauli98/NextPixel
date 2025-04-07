@@ -9,12 +9,14 @@ const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     subject: '',
     message: ''
   });
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -28,21 +30,35 @@ const ContactSection: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitError('');
+    setSubmitSuccess(false);
     
     try {
-      // Simulacija slanja forme
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Resetiranje forme nakon uspješnog slanja
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
+      const response = await fetch('/api/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
       
-      // Ovdje možete dodati logiku za slanje podataka na backend
-      console.log('Form submitted:', formData);
+      const data = await response.json();
+      
+      if (response.ok) {
+        // Resetiranje forme nakon uspješnog slanja
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: ''
+        });
+        
+        setSubmitSuccess(true);
+        console.log('Form submitted successfully:', data);
+      } else {
+        setSubmitError(data.error || 'Došlo je do greške prilikom slanja poruke. Molimo pokušajte ponovo.');
+        console.error('Form submission error:', data);
+      }
     } catch (error) {
       setSubmitError('Došlo je do greške prilikom slanja poruke. Molimo pokušajte ponovo.');
       console.error('Form submission error:', error);
@@ -133,6 +149,12 @@ const ContactSection: React.FC = () => {
                 </div>
               )}
               
+              {submitSuccess && (
+                <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
+                  {t('contact.successMessage') || 'Vaša poruka je uspješno poslana! Kontaktirat ćemo vas uskoro.'}
+                </div>
+              )}
+              
               <form onSubmit={handleSubmit} className="w-full">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6">
                   <div className="w-full">
@@ -161,6 +183,19 @@ const ContactSection: React.FC = () => {
                       placeholder="email@example.com"
                     />
                   </div>
+                </div>
+                
+                <div className="mb-6">
+                  <label htmlFor="phone" className="block text-nextpixel-gray mb-2 font-medium">{t('contact.phone') || 'Telefon'}</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-nextpixel-blue transition-all duration-200"
+                    placeholder={t('contact.phonePlaceholder') || '+387 XX XXX XXX'}
+                  />
                 </div>
                 
                 <div className="mb-6">

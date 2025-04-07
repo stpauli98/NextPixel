@@ -24,7 +24,7 @@ const srTranslations = {
   'about.title': 'Ko smo mi',
   'about.subtitle': 'Digitalna agencija sa strašću za inovacije',
   'about.description': 'NextPixel je digitalna agencija koja se bavi izradom web stranica, web shopova, SEO optimizacijom, održavanjem web sajtova, kao i razvojem softverskih rješenja po zahtjevu klijenata.',
-  'about.history': 'Od 2015. godine posvećeni smo stvaranju digitalnih rješenja koja pomažu našim klijentima da ostvare svoje poslovne ciljeve. Naš pristup kombinuje tehničku stručnost, kreativnost i duboko razumijevanje poslovnih potreba naših klijenata.',
+  'about.history': 'Od 2020. godine posvećeni smo stvaranju digitalnih rješenja koja pomažu našim klijentima da ostvare svoje poslovne ciljeve. Naš pristup kombinuje tehničku stručnost, kreativnost i duboko razumijevanje poslovnih potreba naših klijenata.',
   'about.philosophy': 'Vjerujemo da uspješna digitalna rješenja moraju biti ne samo tehnički izvrsna, već i prilagođena korisnicima, estetski privlačna i optimizovana za postizanje poslovnih rezultata.',
   
   // Značajke
@@ -148,7 +148,7 @@ const enTranslations = {
   'about.title': 'Who We Are',
   'about.subtitle': 'Digital Agency with a Passion for Innovation',
   'about.description': 'NextPixel is a digital agency specializing in website development, e-commerce solutions, SEO optimization, website maintenance, and custom software development tailored to client requirements.',
-  'about.history': 'Since 2015, we have been dedicated to creating digital solutions that help our clients achieve their business goals. Our approach combines technical expertise, creativity, and a deep understanding of our clients\'s business needs.',
+  'about.history': 'Since 2020, we have been dedicated to creating digital solutions that help our clients achieve their business goals. Our approach combines technical expertise, creativity, and a deep understanding of our clients\'s business needs.',
   'about.philosophy': 'We believe that successful digital solutions must not only be technically excellent, but also user-friendly, aesthetically appealing, and optimized to achieve business results.',
   
   // Features
@@ -272,7 +272,7 @@ const deTranslations = {
   'about.title': 'Wer wir sind',
   'about.subtitle': 'Digitalagentur mit Leidenschaft für Innovation',
   'about.description': 'NextPixel ist eine Digitalagentur, die sich auf Webentwicklung, E-Commerce-Lösungen, SEO-Optimierung, Website-Wartung und kundenspezifische Softwareentwicklung spezialisiert hat.',
-  'about.history': 'Seit 2015 widmen wir uns der Entwicklung digitaler Lösungen, die unseren Kunden helfen, ihre Geschäftsziele zu erreichen. Unser Ansatz kombiniert technisches Fachwissen, Kreativität und ein tiefes Verständnis der Geschäftsanforderungen unserer Kunden.',
+  'about.history': 'Seit 2020 widmen wir uns der Entwicklung digitaler Lösungen, die unseren Kunden helfen, ihre Geschäftsziele zu erreichen. Unser Ansatz kombiniert technisches Fachwissen, Kreativität und ein tiefes Verständnis der Geschäftsanforderungen unserer Kunden.',
   'about.philosophy': 'Wir glauben, dass erfolgreiche digitale Lösungen nicht nur technisch hervorragend sein müssen, sondern auch benutzerfreundlich, ästhetisch ansprechend und auf die Erzielung von Geschäftsergebnissen optimiert sein sollten.',
   
   // Features
