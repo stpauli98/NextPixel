@@ -10,9 +10,9 @@ export async function POST(request: Request) {
     const { name, email, phone, message } = formData;
     
     if (!name || !email || !message) {
-      return Response.json(
-        { error: 'Name, email, and message are required' },
-        { status: 400 }
+      return new Response(
+        JSON.stringify({ error: 'Name, email, and message are required' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
@@ -30,12 +30,21 @@ export async function POST(request: Request) {
 
     if (error) {
       console.error('Error sending email:', error);
-      return Response.json({ error: 'Failed to send email' }, { status: 500 });
+      return new Response(
+        JSON.stringify({ error: 'Failed to send email' }),
+        { status: 500, headers: { 'Content-Type': 'application/json' } }
+      );
     }
 
-    return Response.json({ success: true, data });
+    return new Response(
+      JSON.stringify({ success: true, data }),
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
+    );
   } catch (error) {
     console.error('Error in API route:', error);
-    return Response.json({ error: 'Internal server error' }, { status: 500 });
+    return new Response(
+      JSON.stringify({ error: 'Internal server error' }),
+      { status: 500, headers: { 'Content-Type': 'application/json' } }
+    );
   }
 }
