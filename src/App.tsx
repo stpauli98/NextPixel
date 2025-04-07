@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import './App.css';
 
 // Layout Components
 import Navbar from './components/layout/Navbar';
